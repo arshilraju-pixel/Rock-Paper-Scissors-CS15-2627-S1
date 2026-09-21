@@ -12,7 +12,7 @@ def get_player_choice():
        else:
             print("Invalid choice. Try again.")
 
-def check_winner (cpu_choice, player_choice):
+def check_winner(cpu_choice, player_choice):
     if player_choice == cpu_choice:
         winner = "tie"
 
@@ -35,13 +35,45 @@ def check_winner (cpu_choice, player_choice):
             winner = "Computer wins"
 
     return winner
-cpu_choice = get_cpu_choice()
-player_choice = get_player_choice()
 
-winner = check_winner(cpu_choice, player_choice)
+def play_round():
+    cpu_choice = get_cpu_choice()
+    player_choice = get_player_choice()
 
-print("CPU chose", cpu_choice)
-print("You chose", player_choice)
-print("Winner", winner)
+    print("CPU chose", cpu_choice)
+    print("You chose", player_choice)
+
+    winner = check_winner(cpu_choice, player_choice)
+
+
+    print("Round winner", winner)
+
+    return winner
+
+player_wins = 0
+cpu_wins = 0
+ties = 0
+
+while player_wins < 3 and cpu_wins < 3:
+    winner = play_round()
+
+    if winner == "PlYER":
+        player_wins += 1
+    elif winner == "CPU":
+        cpu_wins += 1
+    else:
+        ties += 1
+
+    print()
+    print("Current Score:")
+    print("player:",player_wins)
+    print("CPU:",cpu_wins)
+    print("ties:",ties)
+    print()
+
+if player_wins == 3:
+    print("Overall winner:Player!")
+else:
+    print("Overall winner:CPU!")
 
 
